@@ -1,6 +1,6 @@
-import { jwt } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { UserRequest } from "../interface";
 import { prisma } from "../config/prisma.client"; // Import the Prisma client here
 import {
@@ -22,7 +22,6 @@ const login = async (
     const user = await prisma.user.findFirst({ where: { email } });
 
     if (!user) return next({ status: 404, error: "User Not Exist" });
-    // if (!user) res.send({ status: 404, error: "User Not Exist" });
 
     const match = await bcrypt.compare(password, user?.password);
 
@@ -53,7 +52,6 @@ const signup = async (
     const hashedPassword = await getHashedPassword(password);
 
     const user = await prisma.user.findFirst({ where: { email } });
-    // if (user) res.send({ status: 405, message: "User Already Exist" });
     if (user) return next({ status: 405, message: "User Already Exist" });
 
     const newUser = await prisma.user.create({
@@ -76,8 +74,19 @@ const resetPassword = async (
   next: NextFunction
 ): Promise<any> => {
   try {
-    let { newPassword } = req.body;
-    let token = req.query.token.toString().replace(/d_O_t/g, ".");
+    const { password } = req.body;
+    console.log('req.body',req.body);
+    console.log('password',password);
+    
+    let token = req.query.token
+      ? req.query.token.toString().replace(/d_O_t/g, ".")
+      : null;
+
+    if (!token) {
+      return res
+        .status(400)
+        .json({ error: "Token is required in the query parameters." });
+    }
 
     const decode: any = jwt.verify(token as string, `${process.env.SECRET}`);
     const user = await prisma.user.findFirst({
@@ -88,7 +97,7 @@ const resetPassword = async (
       return next({ status: 404, error: "No User Found" });
     }
 
-    const hashedPassword = await getHashedPassword(newPassword);
+    const hashedPassword = await getHashedPassword(password);
     await prisma.user.update({
       where: { id: user.id },
       data: { password: hashedPassword },

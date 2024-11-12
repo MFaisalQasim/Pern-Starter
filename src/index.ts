@@ -1,16 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({
+  path: ".env",
+});
 import cors from "cors";
 import http from "http";
 import helmet from "helmet";
 import loggerMiddleWare from "./middlewares/logger.middleware";
 import indexRouter from "./routes/index.router";
 import userRouter from "./routes/user.router";
-import errorMiddleware from "./middlewares/error.middleware"
-// dotenv.config({
-//   path: ".env",
-// });
+import errorMiddleware from "./middlewares/error.middleware";
 
 const app = express();
 const server = http.createServer(app);
@@ -39,7 +38,6 @@ app.use(
   })
 );
 
-
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -54,7 +52,6 @@ app.use(errorMiddleware);
 server.listen(PORT, async () => {
   try {
     console.log(`SERVER IS RUNNING ON PORT ${PORT}`);
-    // await startBoss();
   } catch (error) {
     console.log("error", error);
   }
