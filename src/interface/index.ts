@@ -22,3 +22,11 @@ interface IUser {
 export interface UserRequest extends Request {
   user: IUser | null | any;
 }
+
+export interface ValidationError {
+  type: string;
+  value: string;
+  msg: string;
+  path: string;
+  location: string;
+}

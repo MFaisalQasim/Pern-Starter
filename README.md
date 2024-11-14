@@ -50,6 +50,12 @@ npm run seed:db
 npm run migrate:reset
 
 ```
+# Create a build
+
+```
+npm run build
+
+```
 
 # Command to generate JWT_SECRET_KEY
 
@@ -80,3 +86,34 @@ cat /Users/Projects/ArgotDB_user.sql | docker exec -i development_db_1 psql -U r
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## from start setup of project
+## Initialize npm (if not already initialized):
+```````````````````````````
+npm init -y
+
+````````````````````````````````
+
+## Install Prisma and TypeScript-related packages:
+
+````````````````````````````````````````````````
+npm install prisma --save-dev
+npm install @prisma/client
+npm install typescript ts-node @types/node --save-dev
+
+```````````````````````````````````````````
+
+## Create Prisma Configuration:
+````````````````````````````````
+npx prisma init
+
+``````````````````````````
+
+## After creating tables in prisma
+## Generate Migration:
+
+npx prisma migrate dev --name init
+
+## Generate Prisma Client:
+
+npx prisma generate
