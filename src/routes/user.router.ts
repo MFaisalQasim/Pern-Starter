@@ -1,5 +1,4 @@
 import express from "express";
-
 import { signup, login, resetPassword } from "../controllers/user.controller";
 import authenticatedHere from "../middlewares/auth.middleware";
 import { ROLES } from "../config/enums";
@@ -13,9 +12,8 @@ const { ADMIN, USER } = ROLES;
 // userRouter.route("/signup").post(signup);
 userRouter.route("/signup").post(
   signUpValidation,
-  // grantAccess(ADMIN, USER) as any,
-  validationWrapper(signup) as any,
-  signup
+  grantAccess(ADMIN, USER) as any,
+  validationWrapper(signup) as any
 );
 userRouter.route("/login").post(login);
 

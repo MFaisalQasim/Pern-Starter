@@ -7,9 +7,9 @@ interface IUser {
   name: string;
   email: string;
   password?: string;
+  role: string;
   // firstName: string;
   // lastName: string | null | undefined;
-  // role: string;
   // onBoardLink?: string | null;
   // avatarUrl?: string | null;
   // phoneNo?: string | null;

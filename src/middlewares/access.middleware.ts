@@ -3,7 +3,7 @@ import { UserRequest } from "../interface";
 
 export default (...roles: string[]) =>
   (req: UserRequest, next: NextFunction) => {
-    if (req.user) {
+    if (req.user.roles) {
       if (!roles.includes(req.user.roles)) {
         return next({
           message: `User with ${req.user.role} role is not authorizes fro this action`,
@@ -12,4 +12,8 @@ export default (...roles: string[]) =>
       }
       next();
     }
+    return next({
+      message: `No User Role Found`,
+      status: 404,
+    });
   };
