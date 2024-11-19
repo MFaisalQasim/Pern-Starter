@@ -1,6 +1,6 @@
 import express from "express";
 import { signup, login, resetPassword, resetPasswordThroughEmail } from "../controllers/user.controller";
-import authenticatedHere from "../middlewares/auth.middleware";
+import authenticated from "../middlewares/auth.middleware";
 import { ROLES } from "../config/enums";
 import grantAccess from "../middlewares/access.middleware";
 import { signUpValidation } from "../validation/user.validation";
@@ -18,7 +18,7 @@ userRouter.route("/signup").post(
 userRouter.route("/login").post(login);
 
 userRouter.route("/reset-password-through-email").post(resetPasswordThroughEmail);
-userRouter.use(authenticatedHere as any);
+userRouter.use(authenticated as any);
 
 userRouter.route("/reset-password").post(resetPassword);
 

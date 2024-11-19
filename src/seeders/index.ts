@@ -1,19 +1,19 @@
-import { info, log } from "console";
-import { prisma } from "../config/prisma.client";
+import { prisma } from '../config/prisma.client';
+import { info, log } from 'console';
+import SeedUsers from '../seeders/user.seeder';
 
 const seedDatabase = async () => {
-  info("SEEDING STARTED");
+  info('SEEDING STARTED');
   await prisma.$connect().then(async () => {
-    // await SeederUsers(process.env.SEEDLIMIT as unknown as number);
+    await SeedUsers(process.env.SEED_LIMIT as unknown as number);
   });
-  info("SEEDING ENDED");
+  info('SEEDING ENDED');
 };
 
 seedDatabase()
-  .catch((error) => {
-    log("error", error);
+  .catch((err) => {
+    log(`error: ${err}`);
   })
   .finally(async () => {
     await prisma.$disconnect();
-    log("Database connection closed");
   });
