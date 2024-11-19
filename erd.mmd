@@ -1,0 +1,130 @@
+---
+Title: ERD
+---
+erDiagram
+   
+    
+    USER ||--o{ PRODUCT : create
+    USER ||--o{ REVIEWS : create
+    PRODUCT ||--o{ REVIEWS : create
+    PRODUCT ||--o{ LIKES : create
+    PRODUCT ||--o{ DISLIKES : create
+    CART ||--o{ USER : create
+    CARTPOSTS ||--o{ PRODUCT : create
+    CATEGORY ||--o{ SUBCATEGORY : create
+   
+    
+
+    USER {
+        uuid id
+        timestamp createdAt 
+        timestamp updatedAt 
+        string email "unique:true, not null"
+        string password 
+        string firstName "not null"
+        string lastName  
+        enum role "Admin, Parent, Employee"
+        string avatarUrl 
+        string phoneNo "unique:true, nullable"
+        boolean isActive "default:true"
+        boolean isBlocked "default:false"
+        boolean isDeleted "default:false"
+        BigInteger joinedDate
+        string gender
+        string nationality
+        string dob
+        string primaryAddress
+        string secondaryAddress 
+        string country
+        string state
+        string city
+        string postalCode
+       
+
+        PRODUCT product "M:1"
+        REVIEWS reviews "M:1"
+        CART cartId
+    
+       
+    }
+
+    CATEGORY {
+            uuid id
+        timestamp createdAt
+        timestamp updatedAt
+
+        string  name
+    }
+
+    SUBCATEGORY {    uuid id
+        timestamp createdAt
+        timestamp updatedAt
+
+        string name 
+        CATEGORY categoryId
+        }
+
+    PRODUCT {
+        uuid id
+        timestamp createdAt
+        timestamp updatedAt
+        string title
+        string size
+        string images " array[]"
+        int price
+        string description
+        string careInstruction
+
+        REVIEWS reviews "M:1"
+        LIKES likedBy "1:M"
+        DISLIKED dislikedby "1:M"
+    }
+
+    REVIEWS {
+        uuid id
+        timestamp createdAt
+        timestamp updatedAt
+        string review
+        int rating  "1-5"
+       
+        PRODUCT product "1:M"
+        USER reviewById "1:M"
+    }
+
+    LIKES {
+        uuid id
+        timestamp createdAt
+        timestamp updatedAt
+
+        PRODUCT postId "M:M"
+        
+      
+    }
+
+    DISLIKES {
+        uuid id
+        timestamp createdAt
+        timestamp updatedAt
+
+        PRODUCT postId "M:M"
+       
+    }
+
+    CART {
+        uuid id
+        timestamp createdAt
+        timestamp updatedAt
+       
+        USER addedById "1:M"
+
+    }
+
+    CARTPOSTS {
+        uuid id
+        timestamp createdAt
+        timestamp updatedAt
+
+        PRODUCT postId "M:M"
+        CART cartId 
+
+    }

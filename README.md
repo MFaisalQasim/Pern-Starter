@@ -1,11 +1,11 @@
 ### Figma Designs
 
-<!-- [Figma Design](https://www.figma.com/file/TcW2XCgxHkH3PKxfcqJOb8/BloomKidz?type=design&node-id=237-175703&mode=design&t=RmNSLvLazyMS6gxf-0) -->
+<!-- [Figma Design](https://www.figma.com/file/TcW2XCgxHkH3PKxfcqJOb8/NodeExpressTypeSriptStarterKit?type=design&node-id=237-175703&mode=design&t=RmNSLvLazyMS6gxf-0) -->
 
 # Run Postgres docker container
 
 ```bash
-docker run -d --name kidzBloom -p 5434:5432 -e POSTGRES_PASSWORD=postgres -e PGDATA=/var/lib/postgresql/data/pgdata -v <YOUR_LOCAL_PATH>:/var/lib/postgresql/data postgres:15.1
+docker run -d --name faisalCodes -p 5434:5432 -e POSTGRES_PASSWORD=postgres -e PGDATA=/var/lib/postgresql/data/pgdata -v <YOUR_LOCAL_PATH>:/var/lib/postgresql/data postgres:15.1
 ```
 
 <b> <YOUR_LOCAL_PATH> ==> please replace this line to your local path where you want to mount postgres data. </b>
@@ -69,7 +69,7 @@ openssl rand -hex 32
 <p>Open the folder in terminal where you want to save database backup (MacOs)</p>
 
 ```
-docker exec -t kidzBloom pg_dumpall -c -U postgres > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+docker exec -t faisalCodes pg_dumpall -c -U postgres > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
 ```
 
 # Restore database backup in docker database container

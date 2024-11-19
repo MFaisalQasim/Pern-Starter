@@ -1,15 +1,15 @@
-import { Request, Router } from "express";
+import { Request } from 'express';
 
 interface IUser {
   id: string;
   createdAt: Date;
   updatedAt: Date;
-  name: string;
+  firstName: string;
+  lastName: string | null | undefined;
+  // name: string;
   email: string;
   password?: string;
   role: string;
-  // firstName: string;
-  // lastName: string | null | undefined;
   // onBoardLink?: string | null;
   // avatarUrl?: string | null;
   // phoneNo?: string | null;
