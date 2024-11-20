@@ -19,7 +19,7 @@ const createJwtToken = (id: any) => jwt.sign({ id }, `${process.env.SECRET}`, { 
 const parseBigJSON = (json: any) => JSONbig.parse(JSONbig.stringify(json));
 
 const checkValidation = (req: Request) => {
-  let errObj: { [key: string]: string } = {};
+  const errObj: { [key: string]: string } = {};
 
   const isError: any = validationResult(req);
   if (isError.errors.length > 0) {
@@ -32,7 +32,7 @@ const checkValidation = (req: Request) => {
 
 const validationWrapper = (callback: Function) => {
   return (req: Request | UserRequest, res: Response, next: NextFunction): any => {
-    let errors = checkValidation(req as any);
+    const errors = checkValidation(req as any);
     if (errors) {
       return next({ message: errors, status: 400 });
     } else {

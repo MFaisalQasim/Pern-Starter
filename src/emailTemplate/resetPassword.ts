@@ -1,11 +1,9 @@
-/* eslint-disable prettier/prettier */
-
 const resetPasswordSubjectForInternal = (name: string | null) => {
   return `${name}, Password Reset Request`;
 };
 
 const resetPasswordEmailTemplate = (name: string | null, resetUrl: string) => {
-  let template = `<!DOCTYPE html>
+  const template = `<!DOCTYPE html>
   <html lang="en">
   
   <head>

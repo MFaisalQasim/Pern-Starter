@@ -1,5 +1,5 @@
-import { NextFunction } from "express";
-import { UserRequest } from "../interface";
+import { NextFunction } from 'express';
+import { UserRequest } from '../interface';
 
 export default (...roles: string[]) =>
   (req: UserRequest, next: NextFunction) => {

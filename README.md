@@ -1,6 +1,6 @@
 ### Figma Designs
 
-<!-- [Figma Design](https://www.figma.com/file/TcW2XCgxHkH3PKxfcqJOb8/NodeExpressTypeSriptStarterKit?type=design&node-id=237-175703&mode=design&t=RmNSLvLazyMS6gxf-0) -->
+<!-- [Figma Design](https://www.figma.com/file/TcW2XCgxHkH3PKxfcqJOb8/NodeExpressTypeScriptStarterKit?type=design&node-id=237-175703&mode=design&t=RmNSLvLazyMS6gxf-0) -->
 
 # Run Postgres docker container
 
@@ -48,21 +48,18 @@ npm run seed:db
 
 ```
 npm run migrate:reset
-
 ```
 
 # Create a build
 
 ```
 npm run build
-
 ```
 
 # Command to generate JWT_SECRET_KEY
 
 ```
 openssl rand -hex 32
-
 ```
 
 # Creating Database backup from the docker container
@@ -88,13 +85,12 @@ cat /Users/Projects/ArgotDB_user.sql | docker exec -i development_db_1 psql -U r
 
 Nest is [MIT licensed](LICENSE).
 
-## from start setup of project
+## From start setup of project
 
 ## Initialize npm (if not already initialized):
 
 ```
 npm init -y
-
 ```
 
 ## Install Prisma and TypeScript-related packages:
@@ -104,14 +100,12 @@ npm init -y
 npm install prisma --save-dev
 npm install @prisma/client
 npm install typescript ts-node @types/node --save-dev
-
 ```
 
 ## Create Prisma Configuration:
 
 ```
 npx prisma init
-
 ```
 
 ## After creating tables in prisma
@@ -120,14 +114,12 @@ npx prisma init
 
 ```
 npx prisma migrate dev --name init
-
 ```
 
 ## Generate Prisma Client:
 
 ```
 npx prisma generate
-
 ```
 
 ## Seeders
@@ -136,5 +128,149 @@ npx prisma generate
 
 ```
 npm install cross-env --save-dev
+```
+
+## How to Use .eslintrc
+
+## Install ESLint:
+
+```
+npm install eslint --save-dev
+```
+
+## Initialize ESLint:
+
+```
+npx eslint --init
+```
+
+## Run ESLint:
+
+```
+npx eslint .
+```
+
+## Fix Issues:
+
+```
+npx eslint . --fix
+```
+
+## How to Use .prettierrc
+
+## Install Prettier:
+
+```
+npm install prettier --save-dev
+```
+
+## Create a .prettierrc File:
+
+```
+Manually
+```
+
+## Format Code:
+
+```
+npx prettier --write .
+```
+
+## Integrate Prettier with your ESLint setup
+
+## Install Required Packages
+
+```
+npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+```
+
+## Create a .prettierrc File
+
+## Update ESLint Configuration
+
+``
+
+## using eslint.config.mjs file
+
+## Example File
+
+```
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import prettierConfig from 'eslint-config-prettier';
+import prettierPlugin from 'eslint-plugin-prettier';
+
+/** @type {import('eslint').Linter.Config[]} \*/
+export default [
+{ files: ['**/\*.{js,mjs,cjs,ts}'] },
+{ languageOptions: { globals: globals.browser } },
+pluginJs.configs.recommended,
+...tseslint.configs.recommended,
+prettierConfig, // Disables conflicting rules
+{
+plugins: {
+prettier: prettierPlugin, // Adds Prettier plugin
+},
+rules: {
+'prettier/prettier': 'error', // Run Prettier as an ESLint rule
+},
+},
+];
+```
+
+## End Example File
+
+## using .eslint file
+
+## Example File
+
+```
+{
+"env": {
+"browser": true,
+"es2021": true,
+"node": true
+},
+"extends": [
+"eslint:recommended",
+"plugin:@typescript-eslint/recommended",
+"plugin:prettier/recommended"
+],
+"parser": "@typescript-eslint/parser",
+"parserOptions": {
+"ecmaVersion": "latest",
+"sourceType": "module"
+},
+"plugins": ["@typescript-eslint", "prettier"],
+"rules": {
+"prettier/prettier": "error", // Show Prettier issues as ESLint errors
+"@typescript-eslint/no-explicit-any": "off", // Example TypeScript rule
+"no-console": "warn" // Example custom ESLint rule
+}
+}
+```
+
+## End Example File
+
+``
+
+## Add NPM Scripts
+
+```
+
+"lint": "eslint src/**/\*.ts",
+"lint:fix": "eslint . src/**/_.ts --fix",
+"format": "eslint src/\*\*/_.ts --fix",
+```
+
+## Optional: Add .prettierignore
+
+```
+
+node_modules/
+dist/
+build/
+coverage/
 
 ```

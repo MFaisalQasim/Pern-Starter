@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 const onboardingSubjectForInternal = () => {
   return `Welcome to faisalCodes!`;
 };
@@ -40,7 +38,7 @@ const onboardingEmailTemplate = (name: string | null, role: string) => {
     <p>Feel free to explore our platform and discover the amazing features we offer. If you have any questions, don't hesitate to reach out to our support team.</p>
     <p>Best regards,<br/>The faisalCodes Team</p>`;
   }
-  let template = `<!DOCTYPE html>
+  const template = `<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">

@@ -8,7 +8,7 @@ export default async (num: number) => {
   for (let i = 0; i < num; i++) {
     const email = faker.internet.email;
 
-    let user = {
+    const user = {
       email: email(),
       password: '$2b$10$fESRhk9wK8nLdGPbmaKD/OypXZIsE96l6SfrQBdYzaDlIHY.3Ii92',
       role: faker.helpers.arrayElement(['ADMIN', 'USER']),

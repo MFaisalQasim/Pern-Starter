@@ -10,7 +10,7 @@ import { log } from 'console';
 
 const login = async (req: UserRequest, res: Response, next: NextFunction): Promise<any> => {
   try {
-    console.log('body', req.body);
+    log('body', req.body);
 
     const { email, password } = req.body;
 
@@ -35,9 +35,9 @@ const login = async (req: UserRequest, res: Response, next: NextFunction): Promi
   }
 };
 
-const signup = async (req: UserRequest, res: Response, next: NextFunction): Promise<any> => {
+const signup = async (req: UserRequest, res: Response, next: NextFunction) => {
   try {
-    console.log('body here', req.body);
+    log('body here', req.body);
 
     const { email, password } = req.body;
     const hashedPassword = await getHashedPassword(password);
@@ -62,13 +62,13 @@ const resetPassword = async (req: UserRequest, res: Response, next: NextFunction
   try {
     const { password } = req.body;
 
-    let token = req.query.token ? req.query.token.toString().replace(/d_O_t/g, '.') : null;
+    const token = req.query.token ? req.query.token.toString().replace(/d_O_t/g, '.') : null;
 
     if (!token) {
       return res.status(400).json({ error: 'Token is required in the query parameters.' });
     }
 
-    const decode: any = jwt.verify(token as string, `${process.env.SECRET}`);
+    const decode = jwt.verify(token, `${process.env.SECRET}`);
     const user = await prisma.user.findFirst({
       where: { id: decode.id },
     });
@@ -105,7 +105,7 @@ const resetPasswordThroughEmail = async (req: UserRequest, res: Response, next: 
 
     await mailer.sendEmail(
       user.email,
-      'NodeExpressTypeSriptStarterKit: Reset Password',
+      'NodeExpressTypeScriptStarterKit: Reset Password',
       resetPasswordEmailTemplate(user.firstName, resetUrl),
       // Text.reset.message({
       //   firstName: user.firstName,
