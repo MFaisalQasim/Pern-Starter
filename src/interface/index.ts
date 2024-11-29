@@ -30,3 +30,12 @@ export interface ValidationError {
   path: string;
   location: string;
 }
+
+export interface PaymentRequestBody {
+  amount: number;
+  currency: string;
+}
+
+export interface TypedRequestBody<T> extends Request {
+  body: T;
+}
